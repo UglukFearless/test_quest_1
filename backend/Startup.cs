@@ -2,6 +2,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using DBRepository.Factories;
+using DBRepository.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -53,6 +55,13 @@ namespace backend
 
             // Отключим использование конечных точек
             services.AddMvc(option => option.EnableEndpointRouting = false);
+
+            //  to do: ВЫНЕСТИ В ОТДЕЛЬНЫЙ КЛАСС
+            #region Элементы для работы с БД
+
+            services.AddTransient<IRepositoryContextFactory, RepositoryContextFactory>();
+
+            #endregion Элементы для работы с БД
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,6 +70,12 @@ namespace backend
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+            }
+            else
+            {
+                app.UseExceptionHandler("/Error");
+                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
+                app.UseHsts();
             }
 
             app.UseCors("VueCorsPolicy");
