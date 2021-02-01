@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using DBRepository.Factories;
-using DBRepository.Interfaces;
+
+using backend.Configurers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -56,12 +52,10 @@ namespace backend
             // Отключим использование конечных точек
             services.AddMvc(option => option.EnableEndpointRouting = false);
 
-            //  to do: ВЫНЕСТИ В ОТДЕЛЬНЫЙ КЛАСС
-            #region Элементы для работы с БД
+            //  Настройка и добавление репозиториев
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
+            RepositoryConfigurer.ConfigureRepositories(services, connectionString);
 
-            services.AddTransient<IRepositoryContextFactory, RepositoryContextFactory>();
-
-            #endregion Элементы для работы с БД
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

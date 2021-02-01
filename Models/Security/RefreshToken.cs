@@ -32,6 +32,6 @@ namespace Models.Security
 
         // Пользователь для которого получен токен обновления
         [ForeignKey("SecurityUserId")]
-        public SecurityUser User { get; set; }
+        public SecurityUser SecurityUser { get; set; }
     }
 }
