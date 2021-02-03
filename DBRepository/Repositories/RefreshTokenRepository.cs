@@ -15,7 +15,7 @@ using System.Threading.Tasks;
 namespace DBRepository.Repositories
 {
     /// <summary>
-    /// реализация интерфейса доступа к токенам обновления
+    /// Реализация интерфейса доступа к токенам обновления
     /// </summary>
     public class RefreshTokenRepository : BaseRepository, IRefreshTokenRepository
     {

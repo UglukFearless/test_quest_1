@@ -22,7 +22,7 @@ namespace DBRepository.Interfaces
         /// </summary>
         /// <param name="roles">Список ролей</param>
         /// <returns></returns>
-        Task SaveList(List<Role> roles);
+        Task SaveListAsync(IList<Role> roles);
 
         /// <summary>
         /// Получить роль системы по идентификатору

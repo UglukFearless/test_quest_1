@@ -21,6 +21,6 @@ namespace DBRepository.Interfaces
         /// </summary>
         /// <param name="claimsDefenitions">Список разрешений</param>
         /// <returns></returns>
-        Task SaveList(List<ClaimsDefenition> claimsDefenitions);
+        Task SaveListAsync(IList<ClaimsDefenition> claimsDefenitions);
     }
 }

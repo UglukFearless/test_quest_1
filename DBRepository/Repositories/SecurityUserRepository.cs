@@ -49,7 +49,7 @@ namespace DBRepository.Repositories
             return result;
         }
 
-        public async Task SaveList(List<SecurityUser> users)
+        public async Task SaveListAsync(List<SecurityUser> users)
         {
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {

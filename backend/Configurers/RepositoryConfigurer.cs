@@ -7,7 +7,9 @@
 
 using DBRepository.Factories;
 using DBRepository.Interfaces;
+using DBRepository.Interfaces.Common;
 using DBRepository.Repositories;
+using DBRepository.Repositories.Common;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace backend.Configurers
@@ -38,6 +40,10 @@ namespace backend.Configurers
                 );
             services.AddTransient<IRefreshTokenRepository>(
                 provider => new RefreshTokenRepository(connectionString, provider.GetService<IRepositoryContextFactory>())
+                );
+
+            services.AddScoped<IAppUserRepository>(
+                provider => new AppUserRepository(connectionString, provider.GetService<IRepositoryContextFactory>())
                 );
         }
     }

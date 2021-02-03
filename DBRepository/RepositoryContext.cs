@@ -47,6 +47,10 @@ namespace DBRepository
                 .HasIndex(r => r.Nickname)
                 .IsUnique();
 
+            modelBuilder.Entity<AppUser>()
+                .HasIndex(r => r.SecurityUserId)
+                .IsUnique();
+
             #endregion Назначение ключей уникальности для моделей
         }
 

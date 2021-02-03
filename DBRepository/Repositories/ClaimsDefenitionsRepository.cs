@@ -20,7 +20,7 @@ namespace DBRepository.Repositories
         public ClaimsDefenitionsRepository(string connectionString, IRepositoryContextFactory contextFactory)
             : base(connectionString, contextFactory) { }
 
-        public async Task SaveList(List<ClaimsDefenition> claimsDefenitions)
+        public async Task SaveListAsync(IList<ClaimsDefenition> claimsDefenitions)
         {
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {

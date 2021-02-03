@@ -1,5 +1,7 @@
 
 using backend.Configurers;
+using backend.Services.Implementations;
+using backend.Services.Interfaces;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -34,7 +36,9 @@ namespace backend
             services.AddSpaStaticFiles(configuration: options => { options.RootPath = "wwwroot"; });
 
             // Задействуем контроллеры
-            services.AddControllers();
+            services.AddControllers().AddJsonOptions(jsonOptions => {
+                jsonOptions.JsonSerializerOptions.IgnoreNullValues = true;
+            });
 
             // Добавим настройки для кросс-доменных запросов
             services.AddCors(options =>
@@ -55,6 +59,11 @@ namespace backend
             //  Настройка и добавление репозиториев
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
             RepositoryConfigurer.ConfigureRepositories(services, connectionString);
+
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IRoleService, RoleService>();
+            services.AddScoped<IClaimsDefenitionsService, ClaimsDefenitionsService>();
+            services.AddScoped<ISecurityUserService, SecurityUserService>();
 
         }
 

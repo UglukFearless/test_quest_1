@@ -31,7 +31,7 @@ namespace DBRepository.Repositories
             }
         }
 
-        public async Task SaveList(List<Role> roles)
+        public async Task SaveListAsync(IList<Role> roles)
         {
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {

@@ -34,6 +34,6 @@ namespace DBRepository.Interfaces
         /// </summary>
         /// <param name="users">Список пользователей</param>
         /// <returns></returns>
-        Task SaveList(List<SecurityUser> users);
+        Task SaveListAsync(List<SecurityUser> users);
     }
 }
