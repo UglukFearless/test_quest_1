@@ -1,13 +1,16 @@
 
 using backend.Configurers;
+using backend.Security;
 using backend.Services.Implementations;
 using backend.Services.Interfaces;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using Microsoft.IdentityModel.Tokens;
 
 namespace backend
 {
@@ -58,12 +61,11 @@ namespace backend
 
             //  Настройка и добавление репозиториев
             var connectionString = Configuration.GetConnectionString("DefaultConnection");
-            RepositoryConfigurer.ConfigureRepositories(services, connectionString);
-
-            services.AddScoped<IUserService, UserService>();
-            services.AddScoped<IRoleService, RoleService>();
-            services.AddScoped<IClaimsDefenitionsService, ClaimsDefenitionsService>();
-            services.AddScoped<ISecurityUserService, SecurityUserService>();
+            RepositoryConfigurer.ConfigureAdd(services, connectionString);
+            //  Настройка и добавление сервисов работы с сущностями
+            DbServicesConfigurer.ConfigureAdd(services);
+            // Настройка системы безопасности
+            SecurityConfigurer.ConfigureAdd(services);
 
         }
 
@@ -81,11 +83,15 @@ namespace backend
                 app.UseHsts();
             }
 
+            // Добавим авторизацию и аутентификацию
+            app.UseAuthentication();
+            app.UseAuthorization();
+
             app.UseCors("VueCorsPolicy");
             app.UseMvc();
-            //app.UseRouting();
+            app.UseRouting();
             //app.UseEndpoints(endpoints => { endpoints.MapControllers(); });
-            app.UseSpaStaticFiles();
+            //app.UseSpaStaticFiles();
             app.UseSpa(configuration: builder =>
             {
                 if (env.IsDevelopment())

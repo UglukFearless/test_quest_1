@@ -56,7 +56,7 @@ namespace backend.Controllers
         /// </summary>
         /// <param name="key">ключ безопасности</param>
         /// <returns></returns>
-        //[AllowAnonymous]
+        [AllowAnonymous]
         [Route("init")]
         [HttpPost]
         public async Task<IActionResult> InitData([FromBody] Guid key)

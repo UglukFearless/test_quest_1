@@ -75,10 +75,11 @@ namespace DBRepository.Repositories
             }
         }
 
-        public async Task DeleteAllToDateRefreshToken(DateTime toDate)
+        public async Task DeleteOutdatedAsync()
         {
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
+                var toDate = DateTime.Now;
                 var deleteList = context.RefreshTokens.Where(x => x.TimeOfDeath < toDate);
                 context.RefreshTokens.RemoveRange(deleteList);
                 await context.SaveChangesAsync();

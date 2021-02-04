@@ -50,10 +50,8 @@ namespace DBRepository.Interfaces
         RefreshToken GetByLoginAndSession(string login, Guid session);
 
         /// <summary>
-        /// Удалить все токены, чье время жизни истекло до даты
+        /// Удалить все токены, чье время жизни истекло
         /// </summary>
-        /// <param name="toDate">Дата истечения действия токенов</param>
-        /// <returns></returns>
-        Task DeleteAllToDateRefreshToken(DateTime toDate);
+        Task DeleteOutdatedAsync();
     }
 }

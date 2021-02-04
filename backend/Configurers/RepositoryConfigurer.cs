@@ -15,7 +15,7 @@ using Microsoft.Extensions.DependencyInjection;
 namespace backend.Configurers
 {
     /// <summary>
-    /// Класс, предназначенный для выноса болока конфигурации одной группы в отдельную область
+    /// Класс, предназначенный для выноса болока конфигурации репозиториев в отдельную область
     /// </summary>
     public static class RepositoryConfigurer
     {
@@ -25,7 +25,7 @@ namespace backend.Configurers
         /// </summary>
         /// <param name="services"></param>
         /// <param name="connectionString"></param>
-        public static void ConfigureRepositories(IServiceCollection services, string connectionString)
+        public static void ConfigureAdd(IServiceCollection services, string connectionString)
         {
             services.AddTransient<IRepositoryContextFactory, RepositoryContextFactory>();
 
