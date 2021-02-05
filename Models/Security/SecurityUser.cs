@@ -30,6 +30,7 @@ namespace Models.Security
         [Required]
         public string Password { get; set; }
 
+        [JsonIgnore]
         // Список ролей пользователя, определяющих его разрешения
         public List<Role> Roles { get; set; }
     }

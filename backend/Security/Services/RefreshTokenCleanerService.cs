@@ -26,7 +26,7 @@ namespace backend.Security.Services
         /// <summary>
         /// Интервал срабатывания сервиса
         /// </summary>
-        private int _timeInterval = 1;
+        private int _timeInterval = 30;
 
         public RefreshTokenCleanerService(ILogger<RefreshTokenCleanerService> logger, IRefreshTokenService refreshTokenService)
         {

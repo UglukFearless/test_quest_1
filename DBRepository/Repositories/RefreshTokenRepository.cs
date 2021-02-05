@@ -22,7 +22,7 @@ namespace DBRepository.Repositories
         public RefreshTokenRepository(string connectionString, IRepositoryContextFactory contextFactory) 
             : base(connectionString, contextFactory) { }
 
-        public async Task DeleteRefreshToken(string token)
+        public async Task DeleteRefreshTokenAsync(string token)
         {
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
@@ -63,7 +63,7 @@ namespace DBRepository.Repositories
             return result;
         }
 
-        public async Task SaveRefreshToken(RefreshToken refreshToken)
+        public async Task SaveRefreshTokenAsync(RefreshToken refreshToken)
         {
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
@@ -79,7 +79,7 @@ namespace DBRepository.Repositories
         {
             using (var context = ContextFactory.CreateDbContext(ConnectionString))
             {
-                var toDate = DateTime.Now;
+                var toDate = DateTime.UtcNow;
                 var deleteList = context.RefreshTokens.Where(x => x.TimeOfDeath < toDate);
                 context.RefreshTokens.RemoveRange(deleteList);
                 await context.SaveChangesAsync();

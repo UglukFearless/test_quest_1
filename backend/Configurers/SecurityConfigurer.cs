@@ -59,6 +59,9 @@ namespace backend.Configurers
             services.AddScoped<IAuthorizationHandler, PermissionAuthorizationHandler>();
             services.AddSingleton<IAuthorizationPolicyProvider, PermissionPolicyProvider>();
 
+            // сервис для системы безопасности
+            services.AddScoped<AuthService>();
+
             // сервис для удаления устаревших токенов обновления
             services.AddHostedService<RefreshTokenCleanerService>();
         }

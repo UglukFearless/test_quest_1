@@ -23,14 +23,14 @@ namespace DBRepository.Interfaces
         /// </summary>
         /// <param name="refreshToken">Токен обновления</param>
         /// <returns></returns>
-        Task SaveRefreshToken(RefreshToken refreshToken);
+        Task SaveRefreshTokenAsync(RefreshToken refreshToken);
 
         /// <summary>
         /// Удалить токен обновления
         /// </summary>
         /// <param name="token">Уникальная строка токена</param>
         /// <returns></returns>
-        Task DeleteRefreshToken(string token);
+        Task DeleteRefreshTokenAsync(string token);
 
         /// <summary>
         /// Получить токен обновления по уникальной строке, логину пользователя и сессии

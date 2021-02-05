@@ -5,9 +5,11 @@
 *  Назначение: Определение класса RefreshTokenService
 ****************************************************************************/
 
+using backend.Security;
 using backend.Services.Interfaces;
 using DBRepository.Interfaces;
 using Microsoft.Extensions.Logging;
+using Models.Security;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -38,5 +40,6 @@ namespace backend.Services.Implementations
         {
             await _refreshTokenRepository.DeleteOutdatedAsync();
         }
+
     }
 }

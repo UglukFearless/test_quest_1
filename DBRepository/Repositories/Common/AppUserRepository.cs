@@ -48,7 +48,7 @@ namespace DBRepository.Repositories.Common
             return result;
         }
 
-        public AppUser GetUserByLogin(string nickname)
+        public AppUser GetUserByNickname(string nickname)
         {
             AppUser result = null;
 
@@ -56,6 +56,22 @@ namespace DBRepository.Repositories.Common
             {
                 result = context.AppUsers
                     .Where(x => x.Nickname == nickname).FirstOrDefault();
+            }
+
+            return result;
+        }
+
+        public AppUser GetUserByLogin(string login)
+        {
+            AppUser result = null;
+
+            using (var context = ContextFactory.CreateDbContext(ConnectionString))
+            {
+                result = context.AppUsers
+                    .Include(x => x.SecurityUser)
+                    .Include(x => x.SecurityUser.Roles)
+                    .ThenInclude(c => c.ClaimsDefenitions)
+                    .Where(x => x.SecurityUser != null && x.SecurityUser.Login == login).FirstOrDefault();
             }
 
             return result;

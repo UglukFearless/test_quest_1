@@ -28,7 +28,14 @@ namespace DBRepository.Interfaces.Common
         /// </summary>
         /// <param name="nickname">Никнейм пользователя</param>
         /// <returns>Пользователь системы</returns>
-        AppUser GetUserByLogin(string nickname);
+        AppUser GetUserByNickname(string nickname);
+
+        /// <summary>
+        /// Получить пользователя системы по его логину
+        /// </summary>
+        /// <param name="login">Логин пользователя</param>
+        /// <returns>Пользователь системы</returns>
+        AppUser GetUserByLogin(string login);
 
         /// <summary>
         /// Получить пользователя системы по его илентификатору
